@@ -1,4 +1,17 @@
 /* =============================================
+   TOUCH DEVICES — disable pointer-only effects
+   ============================================= */
+
+@media (pointer: coarse) {
+  .hero-char {
+    transition: none;
+  }
+  #hero-canvas {
+    display: none;
+  }
+}
+
+/* =============================================
    TABLET — max 1200px
    ============================================= */
 
@@ -16,55 +29,13 @@
     padding: 0 2rem;
   }
 
-  /* Hero: stack vertically */
+  /* Hero: already centered, just adjust padding */
   #profile {
-    grid-template-columns: 1fr;
-    grid-template-rows: 55vh auto;
     padding-top: 72px;
   }
 
-  .hero-image-side {
-    order: 1;
-  }
-
-  .hero-img-frame {
-    min-height: 55vh;
-  }
-
-  .hero-img-frame::after {
-    background:
-      linear-gradient(to bottom, var(--bg-900) 0%, transparent 10%, transparent 80%, var(--bg-900) 100%);
-  }
-
-  .hero-text-side {
-    order: 2;
-    padding: 3rem 3rem 4rem;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-desc {
-    max-width: 560px;
-  }
-
-  .hero-divider {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .btn-container {
-    justify-content: center;
-  }
-
-  #socials-container {
-    justify-content: center;
-  }
-
-  .hero-img-badge {
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: none;
+  .hero-name-outline {
+    font-size: clamp(6rem, 18vw, 12rem);
   }
 
   /* About section */
@@ -120,19 +91,19 @@
 
 @media screen and (max-width: 768px) {
   #profile {
-    grid-template-rows: 50vh auto;
-  }
-
-  .hero-img-frame {
-    min-height: 50vh;
-  }
-
-  .hero-text-side {
-    padding: 2.5rem 1.5rem 3rem;
+    padding-top: 72px;
   }
 
   .hero-name {
-    font-size: 2.6rem;
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+
+  .hero-name-outline {
+    font-size: clamp(5rem, 22vw, 8rem);
+  }
+
+  .hero-scroll {
+    display: none;
   }
 
   .hero-role {
@@ -198,7 +169,11 @@
 
 @media screen and (max-width: 480px) {
   .hero-name {
-    font-size: 2.2rem;
+    font-size: clamp(2.4rem, 12vw, 3.5rem);
+  }
+
+  .hero-name-outline {
+    display: none;
   }
 
   .title {

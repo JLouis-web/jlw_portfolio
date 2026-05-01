@@ -62,36 +62,65 @@
     <!-- HERO SECTION -->
     <section id="profile">
       <div class="hero-bg-glow"></div>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-      <!-- LEFT: PORTRAIT -->
-      <div class="hero-image-side" data-reveal="fade-right">
-        <div class="hero-img-frame">
-          <img src="./assets/profile-pic.jpg" alt="Jan Louis Loquias" />
-          <div class="hero-img-accent-bar"></div>
-          <div class="hero-img-dot-grid"></div>
-        </div>
-        <div class="hero-img-badge">
-          <span class="badge-pulse"></span>
-          Available for work
-        </div>
-      </div>
+      <!-- Geometric cyberpunk shapes -->
+      <svg class="hero-geo" aria-hidden="true" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice">
+        <!-- Large outer ring -->
+        <circle class="geo-circle" id="geo-c1" cx="500" cy="350" r="280" />
+        <!-- Mid ring -->
+        <circle class="geo-circle" id="geo-c2" cx="500" cy="350" r="190" />
+        <!-- Small inner ring -->
+        <circle class="geo-circle" id="geo-c3" cx="500" cy="350" r="110" />
+        <!-- Accent ring top-left -->
+        <circle class="geo-circle geo-accent" id="geo-c4" cx="160" cy="130" r="70" />
+        <!-- Accent ring bottom-right -->
+        <circle class="geo-circle geo-accent" id="geo-c5" cx="840" cy="570" r="55" />
+        <!-- Diagonal cross lines -->
+        <line class="geo-line" x1="220" y1="80"  x2="500" y2="350" />
+        <line class="geo-line" x1="780" y1="80"  x2="500" y2="350" />
+        <line class="geo-line" x1="100" y1="350" x2="500" y2="350" />
+        <line class="geo-line" x1="900" y1="350" x2="500" y2="350" />
+        <!-- Corner bracket top-left -->
+        <polyline class="geo-bracket" points="60,60 60,140 140,140" />
+        <!-- Corner bracket bottom-right -->
+        <polyline class="geo-bracket" points="940,640 940,560 860,560" />
+      </svg>
 
-      <!-- RIGHT: TEXT CONTENT -->
-      <div class="hero-text-side" data-reveal="fade-left">
-        <p class="hero-eyebrow">Hello, I'm</p>
-        <h1 class="hero-name">
-          Jan Louis<br />
-          <span class="title-accent">Loquias</span>
+      <!-- SVG glitch filter — feTurbulence drives displacement distortion -->
+      <svg id="glitch-svg-filters" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+        <defs>
+          <filter id="glitch-filter" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+            <feTurbulence id="glitch-turb" type="fractalNoise" baseFrequency="0" numOctaves="1" seed="2" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- Decorative outline name (background layer) -->
+      <div class="hero-name-outline" aria-hidden="true">Loquias</div>
+
+      <div class="hero-center" id="hero-center">
+
+        <p class="hero-eyebrow" id="hero-eyebrow">Hello, I'm</p>
+
+        <h1 class="hero-name" id="hero-name">
+          <span class="hero-name-row" id="hero-row-1">Jan Louis</span><br aria-hidden="true" />
+          <span class="hero-name-row" id="hero-row-2">Loquias</span>
         </h1>
-        <p class="hero-role">
+
+        <!-- Animated underline -->
+        <div class="hero-name-underline" id="hero-underline"></div>
+
+        <p class="hero-role" id="hero-role">
           <span id="typed-role"></span><span class="typed-cursor">|</span>
         </p>
-        <p class="hero-desc">
-          Jr. Application Developer &amp; Data Analyst based in the Philippines.
+        <p class="hero-desc" id="hero-desc">
+          Jr. Application Developer &amp; Data Analyst based in the Philippines,
           with a strong passion for exploring new technologies to continuously enhance my skills.
         </p>
-        <div class="hero-divider"></div>
-        <div class="btn-container">
+        <div class="hero-divider" id="hero-divider"></div>
+        <div class="btn-container" id="hero-btns">
           <button class="btn btn-color-1" onclick="window.open('./assets/CV_Loquias.pdf')">
             Download CV
           </button>
@@ -105,6 +134,12 @@
           <img src="./assets/github.png" alt="GitHub" class="icon"
             onclick="location.href='https://github.com/JLouis-web'" />
         </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll" id="hero-scroll">
+        <span class="hero-scroll-line"></span>
+        <span class="hero-scroll-label">scroll</span>
       </div>
     </section>
 
@@ -133,7 +168,7 @@
         <!-- LEFT: Photo + accent -->
         <div class="about-img-col" data-reveal="fade-right">
           <div class="about-img-wrap">
-            <img src="./assets/about-pic1.jpg" alt="Jan Louis Loquias" class="about-photo" />
+            <img src="./assets/profile-pic.jpg" alt="Jan Louis Loquias" class="about-photo" />
             <div class="about-img-ring"></div>
             <div class="about-img-tag">
               <span class="badge-pulse"></span>
@@ -348,6 +383,8 @@
       <p>Copyright &#169; 2025 Jan Louis C. Loquias. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="script.js"></script>
   </body>
 </html>
